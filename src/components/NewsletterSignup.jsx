@@ -5,7 +5,7 @@ import { Mail, CheckCircle2, Loader2 } from "lucide-react";
 
 export default function NewsletterSignup() {
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState("idle"); // 'idle' | 'loading' | 'success' | 'error'
+  const [status, setStatus] = useState("idle");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -14,7 +14,7 @@ export default function NewsletterSignup() {
     const formData = new FormData(e.target);
 
     try {
-      await fetch("/", {
+      await fetch("/__forms.html", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams(formData).toString(),
@@ -46,12 +46,9 @@ export default function NewsletterSignup() {
           <form
             name="newsletter"
             method="POST"
-            data-netlify="true"
-            data-netlify-honeypot="bot-field"
             onSubmit={handleSubmit}
             className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto pt-4"
           >
-            {/* Netlify Form Bot-Field & Form-Name Inputs */}
             <input type="hidden" name="form-name" value="newsletter" />
             <p className="hidden">
               <label>
