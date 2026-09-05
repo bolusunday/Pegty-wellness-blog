@@ -1,5 +1,5 @@
 import Link from "next/link";
-import PostCard from "@/components/PostCard";
+import PostCard from "@/app/components/PostCard";
 import { getPostsByCategory } from "@/lib/posts";
 import { ArrowLeft } from "lucide-react";
 
