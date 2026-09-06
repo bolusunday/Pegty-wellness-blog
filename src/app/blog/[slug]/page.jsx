@@ -5,10 +5,10 @@ import Link from "next/link";
 import { Clock, User, ArrowLeft } from "lucide-react";
 import { notFound } from "next/navigation";
 
-// Custom MDX components to enhance post rendering
+// Custom MDX components to format tables, headings, and images
 const mdxComponents = {
   img: (props) => (
-    <span className="relative my-8 block h-80 md:h-96 w-full overflow-hidden rounded-2xl shadow-sm">
+    <span className="relative my-8 block h-80 md:h-96 w-full overflow-hidden rounded-2xl shadow-xs">
       <Image
         className="object-cover"
         fill
@@ -25,6 +25,56 @@ const mdxComponents = {
     >
       {children}
     </Link>
+  ),
+  // Table overrides
+  table: (props) => (
+    <div className="overflow-x-auto my-8 border border-charcoal/15 rounded-2xl shadow-xs">
+      <table
+        className="w-full text-left border-collapse min-w-[500px]"
+        {...props}
+      />
+    </div>
+  ),
+  thead: (props) => (
+    <thead className="bg-sage/10 text-charcoal font-semibold" {...props} />
+  ),
+  th: (props) => (
+    <th
+      className="p-4 border-b border-charcoal/15 text-sm font-bold text-charcoal"
+      {...props}
+    />
+  ),
+  td: (props) => (
+    <td
+      className="p-4 border-b border-charcoal/10 text-sm text-charcoal/80 bg-white/50"
+      {...props}
+    />
+  ),
+  // List overrides
+  ul: (props) => (
+    <ul
+      className="list-disc list-outside ml-6 space-y-2 my-6 text-charcoal/80"
+      {...props}
+    />
+  ),
+  ol: (props) => (
+    <ol
+      className="list-decimal list-outside ml-6 space-y-2 my-6 text-charcoal/80"
+      {...props}
+    />
+  ),
+  // Heading overrides
+  h2: (props) => (
+    <h2
+      className="text-2xl md:text-3xl font-serif font-bold text-charcoal mt-12 mb-4"
+      {...props}
+    />
+  ),
+  h3: (props) => (
+    <h3
+      className="text-xl md:text-2xl font-serif font-bold text-charcoal mt-8 mb-3"
+      {...props}
+    />
   ),
 };
 
@@ -92,7 +142,7 @@ export default async function SinglePost({ params }) {
             </span>
             <span className="flex items-center gap-2">
               <Clock className="w-4 h-4 text-sage" />{" "}
-              {post.readTime || "5 min read"}
+              {post.readingTime || post.readTime || "5 min read"}
             </span>
             {post.date && <span>{post.date}</span>}
           </div>
@@ -111,7 +161,7 @@ export default async function SinglePost({ params }) {
         )}
 
         {/* Rendered MDX Content */}
-        <div className="prose prose-lg prose-headings:font-serif prose-headings:text-charcoal prose-p:text-charcoal/80 prose-strong:text-charcoal prose-blockquote:border-l-sage prose-blockquote:text-charcoal/70 prose-a:text-sage hover:prose-a:text-terracotta mx-auto max-w-3xl">
+        <div className="prose prose-lg prose-headings:font-serif prose-headings:text-charcoal prose-p:text-charcoal/80 prose-p:leading-relaxed prose-strong:text-charcoal prose-blockquote:border-l-4 prose-blockquote:border-sage prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-charcoal/70 mx-auto max-w-3xl">
           <MDXRemote source={post.content} components={mdxComponents} />
         </div>
       </div>
