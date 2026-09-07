@@ -1,5 +1,6 @@
 import { getAllPosts, getPostBySlug } from "@/lib/posts";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import remarkGfm from "remark-gfm";
 import Image from "next/image";
 import Link from "next/link";
 import { Clock, User, ArrowLeft } from "lucide-react";
@@ -162,7 +163,15 @@ export default async function SinglePost({ params }) {
 
         {/* Rendered MDX Content */}
         <div className="prose prose-lg prose-headings:font-serif prose-headings:text-charcoal prose-p:text-charcoal/80 prose-p:leading-relaxed prose-strong:text-charcoal prose-blockquote:border-l-4 prose-blockquote:border-sage prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-charcoal/70 mx-auto max-w-3xl">
-          <MDXRemote source={post.content} components={mdxComponents} />
+          <MDXRemote
+            source={post.content}
+            components={mdxComponents}
+            options={{
+              mdxOptions: {
+                remarkPlugins: [remarkGfm],
+              },
+            }}
+          />
         </div>
       </div>
 
