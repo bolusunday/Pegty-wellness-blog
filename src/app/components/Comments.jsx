@@ -12,7 +12,7 @@ export default function Comments({ slug }) {
 
     script.onload = () => {
       if (window.commentBox) {
-        window.commentBox("5742728621064192 - proj", {
+        window.commentBox("5742728621064192", {
           defaultBoxId: slug,
         });
       }
