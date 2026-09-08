@@ -2,14 +2,22 @@
 
 import { useEffect } from "react";
 
-export default function Comments({ slug, title }) {
+export default function Comments({ slug }) {
   useEffect(() => {
     if (!slug) return;
 
     const script = document.createElement("script");
-    script.src = "https://cusdis.com/js/cusdis.es.js";
+    script.src = "https://unpkg.com/commentbox.io/dist/commentBox.min.js";
     script.async = true;
-    script.defer = true;
+
+    script.onload = () => {
+      if (window.commentBox) {
+        window.commentBox("5742728621064192 - proj;", {
+          defaultBoxId: slug,
+        });
+      }
+    };
+
     document.body.appendChild(script);
 
     return () => {
@@ -24,13 +32,7 @@ export default function Comments({ slug, title }) {
       <h3 className="text-2xl font-serif font-bold text-charcoal mb-6">
         Comments
       </h3>
-      <div
-        id="cusdis_thread"
-        data-host="https://cusdis.com"
-        data-app-id="d8065090-38fc-41dc-b2bf-f49461f29f5e" // Ensure this is your actual App ID string
-        data-page-id={slug || "default-page"}
-        data-page-title={title || "Blog Post"}
-      />
+      <div className="commentbox" />
     </div>
   );
 }
