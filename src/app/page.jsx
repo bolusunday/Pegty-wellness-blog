@@ -1,6 +1,6 @@
 import Link from "next/link";
-import HeroSection from "@/app/components/HeroSection";
-import PostCard from "@/app/components/PostCard";
+import HeroSection from "@/components/HeroSection";
+import PostCard from "@/components/PostCard";
 import { getAllPosts } from "@/lib/posts";
 import { Monitor, Moon, Activity, Headphones, Apple } from "lucide-react";
 
