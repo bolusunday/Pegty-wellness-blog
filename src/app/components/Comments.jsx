@@ -27,7 +27,7 @@ export default function Comments({ slug, title }) {
       <div
         id="cusdis_thread"
         data-host="https://cusdis.com"
-        data-app-id="YOUR_CUSDIS_APP_ID" // Ensure this is your actual App ID string
+        data-app-id="d8065090-38fc-41dc-b2bf-f49461f29f5e" // Ensure this is your actual App ID string
         data-page-id={slug || "default-page"}
         data-page-title={title || "Blog Post"}
       />
