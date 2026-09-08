@@ -4,6 +4,8 @@ import { useEffect } from "react";
 
 export default function Comments({ slug, title }) {
   useEffect(() => {
+    if (!slug) return;
+
     const script = document.createElement("script");
     script.src = "https://cusdis.com/js/cusdis.es.js";
     script.async = true;
@@ -11,7 +13,6 @@ export default function Comments({ slug, title }) {
     document.body.appendChild(script);
 
     return () => {
-      // Clean up script on unmount
       if (document.body.contains(script)) {
         document.body.removeChild(script);
       }
@@ -26,9 +27,9 @@ export default function Comments({ slug, title }) {
       <div
         id="cusdis_thread"
         data-host="https://cusdis.com"
-        data-app-id="d8065090-38fc-41dc-b2bf-f49461f29f5e"
-        data-page-id={slug}
-        data-page-title={title}
+        data-app-id="YOUR_CUSDIS_APP_ID" // Ensure this is your actual App ID string
+        data-page-id={slug || "default-page"}
+        data-page-title={title || "Blog Post"}
       />
     </div>
   );

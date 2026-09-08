@@ -178,7 +178,7 @@ export default async function SinglePost({ params }) {
           </div>
 
           {/* Giscus Comments */}
-          <Comments />
+          <Comments slug={cleanSlug} title={post.title} />
         </div>
       </div>
 
