@@ -6,17 +6,21 @@ export default function Comments({ slug, title }) {
   useEffect(() => {
     if (!slug) return;
 
-    const script = document.createElement("script");
-    script.src = "https://cusdis.com/js/cusdis.es.js";
-    script.async = true;
-    script.defer = true;
-    document.body.appendChild(script);
+    // Check if Cusdis script is already present on the page
+    const existingScript = document.querySelector(
+      'script[src="https://cusdis.com/js/cusdis.es.js"]',
+    );
 
-    return () => {
-      if (document.body.contains(script)) {
-        document.body.removeChild(script);
-      }
-    };
+    if (!existingScript) {
+      const script = document.createElement("script");
+      script.src = "https://cusdis.com/js/cusdis.es.js";
+      script.async = true;
+      script.defer = true;
+      document.body.appendChild(script);
+    } else if (window.CUSDIS) {
+      // Re-render comments if switching posts on client-side routing
+      window.CUSDIS.initial();
+    }
   }, [slug]);
 
   return (
@@ -30,6 +34,7 @@ export default function Comments({ slug, title }) {
         data-app-id="d8065090-38fc-41dc-b2bf-f49461f29f5e"
         data-page-id={slug}
         data-page-title={title}
+        data-page-url={`https://pegtywellness.vercel.app/blog/${slug}`}
       />
     </div>
   );
