@@ -61,7 +61,7 @@ export default function NewsletterSignup() {
                 name="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Your email address"
+                placeholder="contact@pegty.com"
                 required
                 className="w-full bg-white pl-12 pr-4 py-3 rounded-full border border-charcoal/10 focus:outline-none focus:border-sage focus:ring-1 focus:ring-sage transition-all"
               />
