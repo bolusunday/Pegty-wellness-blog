@@ -12,10 +12,11 @@ export default function Footer() {
           <div className="space-y-6">
             <Link
               href="/"
-              className="font-serif text-3xl text-charcoal font-bold"
+              className="font-serif text-3xl text-charcoal font-bold block mb-4"
             >
               Pegty Wellness<span className="text-sage">.</span>
             </Link>
+
             <div className="flex gap-6 justify-center text-charcoal/60">
               <a
                 href="#"
