@@ -38,8 +38,8 @@ export default function NewsletterSignup() {
           Get Your Free Daily Wellness Guide
         </h2>
         <p className="text-charcoal/70">
-          Join our community and receive weekly insights on holistic health,
-          mindfulness, and natural living directly in your inbox.
+          Join our community and receive periodically insights on holistic
+          health, mindfulness, and natural living directly in your inbox.
         </p>
 
         {status === "success" ? (
