@@ -28,16 +28,6 @@ export default function AboutPage() {
         </h1>
       </div>
 
-      <div className="relative w-full h-80 md:h-[400px] rounded-3xl overflow-hidden bg-sage/10">
-        <Image
-          src="/images/author.jpg"
-          alt="Pegty Wellness Founder"
-          fill
-          className="object-cover"
-          priority
-        />
-      </div>
-
       <div className="prose prose-lg mx-auto text-charcoal/80 space-y-6">
         <p>
           Welcome to Pegty Wellness. We believe that true health is achieved
