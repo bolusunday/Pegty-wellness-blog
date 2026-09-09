@@ -116,8 +116,8 @@ export default function PrivacyPage() {
           <p>
             If you have questions about this Privacy Policy or wish to request
             data removal, please contact us at{" "}
-            <a href="mailto:privacy@pegtywellness.com" className="underline">
-              privacy@pegtywellness.com
+            <a href="mailto:contact@pegty.com" className="underline">
+              contact@pegty.com
             </a>
             .
           </p>
