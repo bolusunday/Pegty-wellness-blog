@@ -20,6 +20,7 @@ export function getAllPosts() {
       return {
         slug,
         ...data,
+        thumbnail: data.thumbnail || data.image || null,
       };
     });
 
@@ -65,5 +66,6 @@ export function getPostBySlug(slug) {
     slug: cleanSlug,
     content,
     ...data,
+    thumbnail: data.thumbnail || data.image || null,
   };
 }
