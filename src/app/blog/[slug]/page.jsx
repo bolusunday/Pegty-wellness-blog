@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Clock, User, ArrowLeft } from "lucide-react";
 import { notFound } from "next/navigation";
-import Comments from "@/app/components/Comments";
+import Comments from "../../components/Comments";
 
 // Custom MDX components to format tables, headings, and images
 const mdxComponents = {
