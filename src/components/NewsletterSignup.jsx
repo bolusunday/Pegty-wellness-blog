@@ -1,23 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, CheckCircle2, Loader2 } from "lucide-react";
 
-export default function NewsletterSignup() {
+export default function Newsletter() {
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState("idle"); // "idle" | "loading" | "success" | "error"
+  const [status, setStatus] = useState("idle");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("loading");
 
     try {
-      // Replace 'YOUR_FORMSPREE_ID' with your actual Formspree endpoint ID
-      const response = await fetch("https://formspree.io/f/YOUR_FORMSPREE_ID", {
+      const response = await fetch("/api/newsletter", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Accept: "application/json",
         },
         body: JSON.stringify({ email }),
       });
@@ -28,68 +25,41 @@ export default function NewsletterSignup() {
       } else {
         setStatus("error");
       }
-    } catch (error) {
+    } catch (err) {
+      console.error("Newsletter error:", err);
       setStatus("error");
     }
   };
 
   return (
-    <section className="bg-sage/10 py-16 px-6 rounded-3xl my-12">
-      <div className="max-w-3xl mx-auto text-center space-y-6">
-        <h2 className="text-3xl font-serif text-charcoal font-bold">
-          Get Your Free Daily Wellness Guide
-        </h2>
-        <p className="text-charcoal/70">
-          Join our community and receive weekly insights on holistic health,
-          mindfulness, and natural living directly in your inbox.
-        </p>
-
-        {status === "success" ? (
-          <div className="flex items-center justify-center gap-2 text-sage bg-white py-4 px-6 rounded-full max-w-md mx-auto shadow-xs font-medium">
-            <CheckCircle2 className="w-5 h-5" />
-            <span>Thank you for subscribing! Check your inbox soon.</span>
-          </div>
-        ) : (
-          <form
-            onSubmit={handleSubmit}
-            className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto pt-4"
-          >
-            <div className="relative flex-grow">
-              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-charcoal/40" />
-              <input
-                type="email"
-                name="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="contact@pegty.com"
-                required
-                className="w-full bg-white pl-12 pr-4 py-3 rounded-full border border-charcoal/10 focus:outline-none focus:border-sage focus:ring-1 focus:ring-sage transition-all"
-              />
-            </div>
-
-            <button
-              type="submit"
-              disabled={status === "loading"}
-              className="bg-terracotta text-white px-8 py-3 rounded-full hover:bg-terracotta/90 transition-colors font-medium whitespace-nowrap flex items-center justify-center gap-2 disabled:opacity-70 cursor-pointer"
-            >
-              {status === "loading" ? (
-                <>
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                  <span>Sending...</span>
-                </>
-              ) : (
-                <span>Subscribe</span>
-              )}
-            </button>
-          </form>
-        )}
-
-        {status === "error" && (
-          <p className="text-red-500 text-sm">
-            Something went wrong. Please try again later.
-          </p>
-        )}
+    <form onSubmit={handleSubmit} className="space-y-3">
+      <div className="flex gap-2">
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Enter your email"
+          required
+          className="px-4 py-2 rounded-full border border-sage/30 focus:outline-none focus:border-sage text-sm w-full"
+        />
+        <button
+          type="submit"
+          disabled={status === "loading"}
+          className="bg-sage text-white px-6 py-2 rounded-full hover:bg-sage/90 transition-colors text-sm font-medium disabled:opacity-50 cursor-pointer"
+        >
+          {status === "loading" ? "Submitting..." : "Subscribe"}
+        </button>
       </div>
-    </section>
+      {status === "success" && (
+        <p className="text-xs text-emerald-600 font-medium">
+          Thanks for subscribing!
+        </p>
+      )}
+      {status === "error" && (
+        <p className="text-xs text-rose-600 font-medium">
+          Something went wrong. Please try again.
+        </p>
+      )}
+    </form>
   );
 }

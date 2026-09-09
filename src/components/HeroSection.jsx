@@ -1,7 +1,16 @@
+"use client";
+
 import Image from "next/image";
-import Link from "next/link";
 
 export default function HeroSection() {
+  const scrollToPosts = (e) => {
+    e.preventDefault();
+    const section = document.getElementById("latest-posts");
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <section className="max-w-7xl mx-auto px-6 py-16 md:py-24 grid md:grid-cols-2 gap-12 items-center">
       <div className="space-y-6">
@@ -13,12 +22,12 @@ export default function HeroSection() {
           Discover natural remedies, mindful practices, and wholesome recipes to
           nourish your body and soul.
         </p>
-        <Link
-          href="#latest-posts"
-          className="inline-block bg-sage text-white px-8 py-3 rounded-full hover:bg-sage/90 transition-colors duration-300 font-medium"
+        <button
+          onClick={scrollToPosts}
+          className="inline-block bg-sage text-white px-8 py-3 rounded-full hover:bg-sage/90 transition-colors duration-300 font-medium cursor-pointer"
         >
           Start Your Journey
-        </Link>
+        </button>
       </div>
       <div className="relative h-[400px] w-full rounded-3xl overflow-hidden shadow-lg">
         <Image
