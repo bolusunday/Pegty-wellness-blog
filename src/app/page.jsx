@@ -30,13 +30,11 @@ const categories = [
 
 export default async function HomePage() {
   const posts = getAllPosts();
-  const featuredPost = posts[0]; // First MDX post as featured
-  const latestPosts = posts.slice(1, 7); // Remaining top 6 posts
+  const latestPosts = posts.slice(0, 6);
 
   return (
     <div className="space-y-24 pb-24">
-      {/* Pass real featured post data */}
-      <HeroSection featuredPost={featuredPost} />
+      <HeroSection />
 
       {/* Interactive Category Pills */}
       <section className="max-w-7xl mx-auto px-6 flex flex-wrap justify-center gap-4">
@@ -56,7 +54,10 @@ export default async function HomePage() {
       </section>
 
       {/* Real MDX Articles Grid */}
-      <section className="max-w-7xl mx-auto px-6">
+      <section
+        id="latest-posts"
+        className="scroll-mt-12 max-w-7xl mx-auto px-6"
+      >
         <h2 className="text-3xl font-serif text-charcoal mb-10 text-center font-bold">
           Latest Musings
         </h2>
