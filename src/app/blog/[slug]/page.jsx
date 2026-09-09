@@ -6,6 +6,8 @@ import Link from "next/link";
 import { Clock, User, ArrowLeft } from "lucide-react";
 import { notFound } from "next/navigation";
 import Comments from "@/components/Comments";
+import ShareButtons from "@/components/ShareButtons";
+
 // Custom MDX components to format tables, headings, and images
 const mdxComponents = {
   img: (props) => (
@@ -160,7 +162,10 @@ export default async function SinglePost({ params }) {
       )}
 
       {/* Main Content Container */}
-      <div className="max-w-3xl mx-auto space-y-12">
+      <div className="max-w-3xl mx-auto space-y-8">
+        {/* Top Share Bar */}
+        <ShareButtons title={post.title} slug={cleanSlug} />
+
         {/* Rendered MDX Content */}
         <div className="prose prose-lg prose-headings:font-serif prose-headings:text-charcoal prose-p:text-charcoal/80 prose-p:leading-relaxed prose-strong:text-charcoal prose-blockquote:border-l-4 prose-blockquote:border-sage prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-charcoal/70">
           <MDXRemote
@@ -173,6 +178,9 @@ export default async function SinglePost({ params }) {
             }}
           />
         </div>
+
+        {/* Bottom Share Bar */}
+        <ShareButtons title={post.title} slug={cleanSlug} />
 
         {/* Comments Component */}
         <Comments slug={cleanSlug} title={post.title} />

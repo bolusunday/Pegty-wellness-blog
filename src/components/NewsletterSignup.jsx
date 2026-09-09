@@ -5,22 +5,29 @@ import { Mail, CheckCircle2, Loader2 } from "lucide-react";
 
 export default function NewsletterSignup() {
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState("idle");
+  const [status, setStatus] = useState("idle"); // "idle" | "loading" | "success" | "error"
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("loading");
 
-    const formData = new FormData(e.target);
-
     try {
-      await fetch("/__forms.html", {
+      // Replace 'YOUR_FORMSPREE_ID' with your actual Formspree endpoint ID
+      const response = await fetch("https://formspree.io/f/YOUR_FORMSPREE_ID", {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(formData).toString(),
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({ email }),
       });
-      setStatus("success");
-      setEmail("");
+
+      if (response.ok) {
+        setStatus("success");
+        setEmail("");
+      } else {
+        setStatus("error");
+      }
     } catch (error) {
       setStatus("error");
     }
@@ -44,18 +51,9 @@ export default function NewsletterSignup() {
           </div>
         ) : (
           <form
-            name="newsletter"
-            method="POST"
             onSubmit={handleSubmit}
             className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto pt-4"
           >
-            <input type="hidden" name="form-name" value="newsletter" />
-            <p className="hidden">
-              <label>
-                Don't fill this out if you're human: <input name="bot-field" />
-              </label>
-            </p>
-
             <div className="relative flex-grow">
               <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-charcoal/40" />
               <input
@@ -72,7 +70,7 @@ export default function NewsletterSignup() {
             <button
               type="submit"
               disabled={status === "loading"}
-              className="bg-terracotta text-white px-8 py-3 rounded-full hover:bg-terracotta/90 transition-colors font-medium whitespace-nowrap flex items-center justify-center gap-2 disabled:opacity-70"
+              className="bg-terracotta text-white px-8 py-3 rounded-full hover:bg-terracotta/90 transition-colors font-medium whitespace-nowrap flex items-center justify-center gap-2 disabled:opacity-70 cursor-pointer"
             >
               {status === "loading" ? (
                 <>
